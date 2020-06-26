@@ -30,3 +30,5 @@ Imports:
     dplyr,
     tibble,
     stats
+URL: https://github.com/bcjaeger/cleanRbp
+BugReports: https://github.com/bcjaeger/cleanRbp/issues
