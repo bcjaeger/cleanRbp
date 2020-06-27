@@ -29,6 +29,7 @@ Imports:
     purrr,
     dplyr,
     tibble,
-    stats
+    stats,
+    tidyr
 URL: https://github.com/bcjaeger/cleanRbp
 BugReports: https://github.com/bcjaeger/cleanRbp/issues

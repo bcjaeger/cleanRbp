@@ -14,6 +14,14 @@ Blood pressure (BP) is routinely measured in clinical practice.
     particular periods of the day (e.g., while a person is asleep). The 
     cleanRbp package exists to simplify data processing for these analyses.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/bcjaeger/cleanRbp}
+  \item Report bugs at \url{https://github.com/bcjaeger/cleanRbp/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Byron Jaeger \email{bcjaeger@uab.edu} (\href{https://orcid.org/0000-0001-7399-2299}{ORCID})
 

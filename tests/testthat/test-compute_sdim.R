@@ -5,6 +5,8 @@ test_that("standard inputs work", {
   mean_bps = runif(n = 100, min = 80, max = 190)
   sd_bps = runif(n = 100, min = 1, max = 3)
 
+  mean_bps[5] <- NA_real_
+
   expect_is(cmp_sdim_coefs(mean_bps, sd_bps), 'numeric')
   expect_is(cmp_sdim_values(mean_bps, sd_bps), 'numeric')
   expect_equal(length(cmp_sdim_values(mean_bps, sd_bps)), 100)

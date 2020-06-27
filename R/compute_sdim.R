@@ -45,16 +45,23 @@ cmp_sdim_coefs <- function(bp_mean, bp_sd){
   if(!is.numeric(bp_mean)) stop('bp_mean should be numeric', call. = F)
   if(!is.numeric(bp_sd)) stop('bp_sd should be numeric', call. = F)
 
-  bp_okay <- all(bp_mean > 0)
-  sd_okay <- all(bp_sd >= 0)
+  bp_okay <- all(stats::na.omit(bp_mean) > 0)
+  sd_okay <- all(stats::na.omit(bp_sd) >= 0)
 
   if(!bp_okay) stop('all bp_mean values should be >0', call. = FALSE)
   if(!sd_okay) stop('all bp_sd values should be >=0', call. = FALSE)
 
-  log_mean <- safe_log(bp_mean)
-  log_sd <- safe_log(bp_sd)
-
-  stats::coef(stats::lm(log_sd ~ log_mean))
+  data.frame(
+    bp_mean = bp_mean,
+    bp_sd = bp_sd
+  ) %>%
+    tidyr::drop_na() %>%
+    dplyr::transmute(
+      log_mean = safe_log(bp_mean),
+      log_sd = safe_log(bp_sd)
+    ) %>%
+    stats::lm(formula = log_sd ~ log_mean, data = .) %>%
+    stats::coef()
 
 }
 
