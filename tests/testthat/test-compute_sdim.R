@@ -7,6 +7,9 @@ test_that("standard inputs work", {
 
   mean_bps[5] <- NA_real_
 
+  # cmp_sdim_values(mean_bps, sd_bps, method = 'A')
+  # cmp_sdim_values(mean_bps, sd_bps, method = 'B')
+
   expect_is(cmp_sdim_coefs(mean_bps, sd_bps), 'numeric')
   expect_is(cmp_sdim_values(mean_bps, sd_bps), 'numeric')
   expect_equal(length(cmp_sdim_values(mean_bps, sd_bps)), 100)
@@ -16,5 +19,6 @@ test_that("standard inputs work", {
 
   expect_error(cmp_sdim_coefs(mean_bps, sd_bps), 'at least')
   expect_error(cmp_sdim_coefs(letters[1:5], letters[1:5]), 'numeric')
+
 
 })

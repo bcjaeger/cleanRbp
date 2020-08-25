@@ -9,7 +9,6 @@ safe_log <- function(x){
 }
 
 
-
 #' Standard deviation independent of mean
 #'
 #' @param bp_mean a numeric vector of mean blood pressure values.
@@ -34,7 +33,7 @@ safe_log <- function(x){
 #' cmp_sdim_coefs(mean_bps, sd_bps)
 #' cmp_sdim_values(mean_bps, sd_bps)
 
-cmp_sdim_coefs <- function(bp_mean, bp_sd){
+cmp_sdim_coefs <- function(bp_mean, bp_sd, method = 'A'){
 
   if(length(bp_mean) != length(bp_sd))
     stop('bp_mean and bp_sd should have the same length', call. = FALSE)
@@ -67,9 +66,20 @@ cmp_sdim_coefs <- function(bp_mean, bp_sd){
 
 #' @rdname cmp_sdim_coefs
 #' @export
-cmp_sdim_values <- function(bp_mean, bp_sd){
+cmp_sdim_values <- function(bp_mean, bp_sd, method = 'A'){
 
-  coefs <- cmp_sdim_coefs(bp_mean, bp_sd)
-  coefs['(Intercept)'] + bp_sd / (bp_mean^(coefs['log_mean']))
+  coefs <- cmp_sdim_coefs(bp_mean, bp_sd, method = method)
+
+  slope <- coefs['log_mean']
+  intercept <- coefs['(Intercept)']
+  bp_mean_overall <- mean(bp_mean, na.rm = TRUE)
+
+
+  switch(
+    method,
+    "A" = (bp_sd / (bp_mean^slope)) * bp_mean_overall^slope,
+    "B" = intercept + bp_sd / (bp_mean^slope)
+  )
+
 
 }
