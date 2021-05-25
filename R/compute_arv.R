@@ -121,7 +121,7 @@ cmp_arv <- function(time, value, phase=NULL){
   weights <- tapply(time, phase, diff, simplify = FALSE) %>%
     purrr::keep(~length(.x) > 0)
 
-  bad_weights <- purrr::map_lgl(weights, ~any(.x) <= 0)
+  bad_weights <- purrr::map_lgl(weights, ~any(as.logical(.x)) <= 0)
 
   if (any(bad_weights)) {
     stop(
